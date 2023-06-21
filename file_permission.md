@@ -1,43 +1,43 @@
 # File permissions
 ## Task 2.8a
-### **Why is managing file ownership important?**
+### **1) Why is managing file ownership important?**
 This is to ensure that only authorised users or processes can access and modify sensitive files.
 
-### **What is the command to view file ownership?**
+### **2) What is the command to view file ownership?**
 ```bash
 ls -l
 ``` 
 This command displays various information related to the file permission.
 
-### **What permissions are set when a user creates a file or directory? Who does file or directory belong to?**
+### **3) What permissions are set when a user creates a file or directory? Who does file or directory belong to?**
 When a user creates a file or directory the ownership falls onto the user by  default.
 
-### **Why does the owner, by default, not recieve X permissions when they create a file?**
+### **4) Why does the owner, by default, not recieve X permissions when they create a file?**
 This is because execute permissions are usually used for files that are executable.
 
-### **What command is used to change the owner of a file or directory?**
+### **5) What command is used to change the owner of a file or directory?**
 *chown* (change owner)
 ```bash
 chown <new_owner> <file_or_directory>
 ```
 
 ## Task 2.8b
-### **Does being the owner of a file mean you have full permissions on that file?**
+### **1) Does being the owner of a file mean you have full permissions on that file?**
 No, being an owner does not mean that the owner will have full permissions but it means that they can modify permissions or change file owner of the file.
 
-### **If you give permissions to the User entity, what does this mean?**
+### **2) If you give permissions to the User entity, what does this mean?**
 It means that only the owner of the file has permissions.
 
-### **If you give permissions to the Group entity, what does this mean?**
+### **3) If you give permissions to the Group entity, what does this mean?**
 This means for that directory or file, users who belong in the group have permissions. 
 
-### **If you give permissions to the Other entity, what does this mean?**
+### **4) If you give permissions to the Other entity, what does this mean?**
 This means everyone have permission associated to that file.
 
-### **You give the following permissions to a file: User permissions are read-only, Group permissions are read and write, Other permissions are read, write and execute. You are logged in as the user which is owner of the file. What permissions will you have on this file?**
+### **5) You give the following permissions to a file: User permissions are read-only, Group permissions are read and write, Other permissions are read, write and execute. You are logged in as the user which is owner of the file. What permissions will you have on this file?**
 I will have read-only permissions on this file, thi means I can only read the content but not able to modify or execute the file. Also, the Group and Other permissions which are read and write, and read, write and execute does not applicable to me as the owner of the file. 
 
-### **Here is one line from the ls -l. Work everything you can about permissions on this file or directory.**
+### **6) Here is one line from the ls -l. Work everything you can about permissions on this file or directory.**
 ```
 -rwxr-xr-- 1 tcboony staff  123 Nov 25 18:36 keeprunning.sh
 ```
@@ -46,11 +46,7 @@ I will have read-only permissions on this file, thi means I can only read the co
 * Other: r-- means read only
 
 ## Task 2.8c  
-### **Use numeric values to give read + write access to User, read access to Group, and no access to Other.**
-```bash
-chmod 640 testfile.txt
-```
-### **What numeric values are assigned to each permission?**
+### **1) What numeric values are assigned to each permission?**
 | Number | Permission Represent |
 | ----------- | ----------- |
 | 0 | No permission |
@@ -61,6 +57,17 @@ chmod 640 testfile.txt
 | 5 | Read and execute permission |
 | 6 | Read and write permission |
 | 7 | Execute and write and read permission|
+
+### **2) What numeric values are assigned to each permission?**
+* Execute permission: 1
+* Write permission: 2
+* Read permission: 4
+
+### **3) What value would assign read, write and execute permissions?**
+7
+
+### **4) What value would assign read and execute permissions?**
+5
 
 ### **Often, a file or directory's mode/permissions are represented by 3 numbers. What do you think 644 would mean?**
 6: first number represents the permission of the user: read and write only
@@ -101,4 +108,6 @@ c. Take write permissions away from Group
 ```bash
 chmod g-w testfile.txt
 ```
-
+d. Use numeric values to give read + write access to User, read access to Group, and no access to Other
+```bash
+chmod 640 testfile.txt
