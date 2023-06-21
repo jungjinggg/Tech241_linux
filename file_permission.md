@@ -10,7 +10,7 @@ ls -l
 This command displays various information related to the file permission.
 
 ### **3) What permissions are set when a user creates a file or directory? Who does file or directory belong to?**
-When a user creates a file or directory the ownership falls onto the user by  default.
+When a user creates a file or directory the ownership falls onto the user by default.
 
 ### **4) Why does the owner, by default, not recieve X permissions when they create a file?**
 This is because execute permissions are usually used for files that are executable.
@@ -81,7 +81,7 @@ Read and execute permissions: 5
 ### **2) To change permissions on a file what must the end user be?**
 to change permissions on a file you must be:  
 1) The owner of the file
-2) superuser 
+2) Users with sudo privileges - sudo is a command that allows users to run programs with the privileges of another user (the file owner) 
 
 ### **3) Examples of some different ways/syntaxes to set permissions on a new file (named testfile.txt) to:**
 
@@ -111,3 +111,4 @@ chmod g-w testfile.txt
 d. Use numeric values to give read + write access to User, read access to Group, and no access to Other
 ```bash
 chmod 640 testfile.txt
+```
