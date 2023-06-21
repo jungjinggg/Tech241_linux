@@ -64,12 +64,12 @@ I will have read-only permissions on this file, thi means I can only read the co
 * Read permission: 4
 
 ### **3) What value would assign read, write and execute permissions?**
-7
+Read, write and execute permissions: 7
 
 ### **4) What value would assign read and execute permissions?**
-5
+Read and execute permissions: 5
 
-### **Often, a file or directory's mode/permissions are represented by 3 numbers. What do you think 644 would mean?**
+### **5) Often, a file or directory's mode/permissions are represented by 3 numbers. What do you think 644 would mean?**
 6: first number represents the permission of the user: read and write only
 4: second number represents the permission of the group: 
 4: the third number represents the permission of the 
