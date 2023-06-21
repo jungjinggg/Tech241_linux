@@ -71,7 +71,9 @@ Read and execute permissions: 5
 
 ### **5) Often, a file or directory's mode/permissions are represented by 3 numbers. What do you think 644 would mean?**
 6: first number represents the permission of the user: read and write only
+
 4: second number represents the permission of the group 
+
 4: the third number represents the permission of the other
 
 ## Task 2.8d
