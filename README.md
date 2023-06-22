@@ -17,7 +17,7 @@ history
 ```
 *Displays the processes that is currently running*
 ```bash
-ps -p $$
+ps
 ```
 *Navigate to your home directory*
 ```bash
@@ -75,3 +75,92 @@ tail -2 <filename>
 ```bash
 nl <filename>
 ```
+*Install packages sodu command is for accessing super user permissions*
+```bash
+apt install <package>
+sodu apt install <package>
+```
+*Update sources -y is optional used to ask linux to say yes to everything.(This is used when `apt install` comes up with error)*
+```bash
+sodu apt update -y
+```
+*tree shows the file or folder structure*
+```bash
+tree
+```
+![tree_structure](tree_structure.png)
+
+*Move a file from home directory to a folder*
+```bash
+mv <filename> <directory>/<directory>
+mv chicken-joke.txt funny-stuff/funny-jokes/
+```
+*Move a file from home directory to a folder when you are inside that folder*
+```bash
+mv ../chicken-joke.txt/. 
+```
+*Move a file from a directory to home directory*
+```bash
+mv <filename> ~
+mv bad-joke.txt ~
+```
+
+## Command for running a script in Linux
+*Upgrade packages*
+```bash
+sudo apt upgrade -y
+```
+*Install nginx*
+```bash
+sudo install nginx
+```
+*Start nginx*
+```bash
+sudo systemctl start nginx
+```
+*Restart nginx*
+```bash
+sudo systemctl restart nginx
+```
+*Enable nginx*
+```bash
+sudo systemctl enable nginx
+```
+*Check if nginx is enabled*
+```bash
+sudo systemctl is-enabled nginx
+```
+check the status of nginx
+```bash
+sudo systemctl status nginx
+```
+*Displays environment variables*
+```bash
+printenv
+```
+*Create environment variable*
+```bash
+export <VARIABLE_NAME>=<Name>
+```
+*Running a script if in the current directory*
+```bash
+./<filename>
+```
+*Create a persistent environment variable*
+
+locate .bashrc and edit the file by going to the end 
+```bash
+export MYNAME=parichat
+```
+*Reloads configuration file*
+```bash
+source .bashrc
+```
+
+## Processes
+There are 2 tpyes of processes in Linux which are ststem processes and user processes. Each process has its own unique process ID (PID)
+
+### Commonly used command 
+`ps` displays information about active processes.
+
+`ps aux` displays a detailed list of processes running on the system
