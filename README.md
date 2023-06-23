@@ -164,3 +164,23 @@ There are 2 tpyes of processes in Linux which are ststem processes and user proc
 `ps` displays information about active processes.
 
 `ps aux` displays a detailed list of processes running on the system
+
+## To stop processes from running
+*Checks job status*
+```bash
+jobs
+jobs -l
+```
+### There are 64 levels on stopping the processes from running
+*Hang up processes*
+```bash
+kill -1 <PID>
+```
+*Terminate processes (don't need to specify signal no. which is 15)*
+```bash
+kill <PID>
+```
+*Kill processes, this will brute force parent processes to stop running except the child processes which results the processes to become zombie processes that are still running in the background*
+```bash
+kill -9 <PID>
+```
