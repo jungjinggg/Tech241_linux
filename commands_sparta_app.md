@@ -21,17 +21,17 @@ The app is node js app and works on port 3000. It has 2 different features:
     
     On your home directory 
 
-    a.) Download node js
+    1) Download node js
     ```
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
     ```
 
-    b.) Install node js
+    2) Install node js
     ```
     sudo apt install nodejs -y
     ```
 
-    c.) Install node package manager pm2 to run nodejs in the background (not critical atm)
+    3) Install node package manager pm2 to run nodejs in the background (not critical atm)
     ```
     sudo npm install pm2 -g
     ```
@@ -68,26 +68,26 @@ The app is node js app and works on port 3000. It has 2 different features:
 2) Update and upgrade
 3) Install Mongo Database - version 3.2.x
    
-    a) download key for the right version
+    1) download key for the right version
     ```bash
     wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
     ```
-    b) Souce list
+    2) Souce list
     ```bash
     echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
     ```
-    c) update again
+    3) update again
     ```bash
     sudo apt update -y
     ```
-    d) install Mongo DB
+    4) install Mongo DB
     ``` bash
     sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
     ```
 
 4) Configure mondo db to accept connections from app VM
    
-   a) Change bindIp to accept any IP address (This is for testing only)
+   1) Change bindIp to accept any IP address (This is for testing only)
    ```
    sudo nano /etc/mongod.conf
    ```
@@ -98,15 +98,15 @@ The app is node js app and works on port 3000. It has 2 different features:
     port: 27017
     bindIp: 0.0.0.0
    ```
-   b) Start Mongo batabase 
+   2) Start Mongo batabase 
    ```
    sudo systemctl start mongod
    ```
-   Check the status
+   3) Check the status
    ```
    sudo systemctl status mongod
    ```
-   c) Enable Mongo database
-    ```
+   4) Enable Mongo database
+   ```
    sudo systemctl enable mongod
    ```
