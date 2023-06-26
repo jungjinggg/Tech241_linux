@@ -46,11 +46,8 @@ The app is node js app and works on port 3000. It has 2 different features:
     ```
 
     2) Start the app
-    ```npm start```
-
-    or
-
-    ``` node app.js```
+   
+    ```npm start``` or ``` node app.js```
 
 ## Stop the app
 ### shut down the app from running
