@@ -39,13 +39,13 @@ The app is node js app and works on port 3000. It has 2 different features:
    ```git clone <repo_url>```
 6) If need posts page, connect to db set DB_HOST env variable
    ```export DB_HOST=mongodb://172.187.176.58:27017/posts```   
-7) In the app folder run:
-    ## Navigate to inside the app folder to install the app
+7) In the app folder:
+    1) Navigate to inside the app folder to install the app
     ```
     npm install
     ```
 
-    ## Start the app
+    2) Start the app
     ```npm start```
 
     or
