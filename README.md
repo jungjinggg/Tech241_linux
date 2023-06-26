@@ -134,6 +134,7 @@ check the status of nginx
 ```bash
 sudo systemctl status nginx
 ```
+## Environment variables 
 *Displays environment variables*
 ```bash
 printenv
