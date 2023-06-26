@@ -21,17 +21,17 @@ The app is node js app and works on port 3000. It has 2 different features:
     
     On your home directory 
 
-    ### 1) Download node js
+    a.) Download node js
     ```
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
     ```
 
-    ### 2) Install node js
+    b.) Install node js
     ```
     sudo apt install nodejs -y
     ```
 
-    ### 3) Install node package manager pm2 to run nodejs in the background (not critical atm)
+    c.) Install node package manager pm2 to run nodejs in the background (not critical atm)
     ```
     sudo npm install pm2 -g
     ```
