@@ -1,6 +1,6 @@
 # Sparta App
 
-The app is node js app and works on port 3000. It has 2 different features:
+The app is nodejs app and works on port 3000. It has 2 different features:
 
 1) **Front web page** (no database need to get this to run)
 2) **Database posts** (shows the data from the database)
@@ -21,12 +21,12 @@ The app is node js app and works on port 3000. It has 2 different features:
     
     On your home directory 
 
-    1) Download node js
+    1) Download nodejs
     ```
     curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
     ```
 
-    2) Install node js
+    2) Install nodejs
     ```
     sudo apt install nodejs -y
     ```
