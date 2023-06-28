@@ -1,4 +1,4 @@
-# Sparta App
+# Sparta App (Manually)
 
 The app is nodejs app and works on port 3000. It has 2 different features:
 
@@ -37,7 +37,9 @@ The app is nodejs app and works on port 3000. It has 2 different features:
     ```
 5) Get app folder to the app VM
    ```git clone <repo_url>```
-6) If need posts page, connect to db set DB_HOST env variable
+6) If need posts page, connect to db set DB_HOST env variable 
+   ```export DB_HOST=mongodb://<vm_ip_address>:27017/posts```
+   
    ```export DB_HOST=mongodb://172.187.176.58:27017/posts```   
 7) In the app folder:
     1) Navigate to inside the app folder to install the app
@@ -60,7 +62,7 @@ The app is nodejs app and works on port 3000. It has 2 different features:
 
 ```kill -9 <PID>```
 
-# Requirements for running database VM
+## Requirements for running database VM
 1) Linux VM - Ubuntu 18.04 LTS
 2) Update and upgrade
 3) Install Mongo Database - version 3.2.x
@@ -69,7 +71,7 @@ The app is nodejs app and works on port 3000. It has 2 different features:
     ```bash
     wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
     ```
-    2) Souce list
+    2) Source list - specify mongo database version
     ```bash
     echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
     ```
