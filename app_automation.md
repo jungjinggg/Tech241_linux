@@ -11,7 +11,7 @@ sudo apt update -y
 sudo apt upgrade -y
 
 # install nginx - when installed it starts autometically
-apt install nginx -y
+sudo apt install nginx -y
 
 # restart nginx
 sudo systemctl restart nginx
@@ -53,6 +53,8 @@ when start terminal when run command you can start
 everytime you run a script u specify /bin/bash tell linux to run this script to run another bash shell
 
 # Automation L2
+
+## Configure Mongo DB VM (including bindIp) with the script
 ```bash
 #!/bin/bash
 
@@ -90,6 +92,7 @@ sudo systemclt enable mongod
 `sed` command -i is used to replace bindIP so that inbound port can be from any ports
 
 # Automation L3
+## Modify app VM script to use database VM 
 ```bash
 #!/bin/bash
 
@@ -132,5 +135,8 @@ npm install
 # run sparta node app in the background
 pm2 start app.js
 ```
+## Stop pm2
+`pm2 stop 0`
+
 ### Note
 *To get the app working, the database vm needs to be run first to pull data from MongoDB. Then run the app vm so that it can create a post page with the data from database vm.*

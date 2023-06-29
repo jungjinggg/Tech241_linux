@@ -185,3 +185,11 @@ kill <PID>
 ```bash
 kill -9 <PID>
 ```
+
+## Blockers
+
+The blockers that we've discoverd when running the sparta app:
+* Don't double check if the db script are running correctly and fully
+* Some the long commands are cut off
+* Wrong image selected when created virtual machines
+*   
