@@ -38,6 +38,7 @@ The app is nodejs app and works on port 3000. It has 2 different features:
 5) Get app folder to the app VM
    ```git clone <repo_url>```
 6) If need posts page, connect to db set DB_HOST env variable 
+   
    ```export DB_HOST=mongodb://<vm_ip_address>:27017/posts```
    
    ```export DB_HOST=mongodb://172.187.176.58:27017/posts```   
@@ -84,7 +85,7 @@ The app is nodejs app and works on port 3000. It has 2 different features:
     sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
     ```
 
-4) Configure mondo db to accept connections from app VM
+4) Configure mongodb to accept connections from app VM
    
    1) Change bindIp to accept any IP address (This is for testing only)
    ```

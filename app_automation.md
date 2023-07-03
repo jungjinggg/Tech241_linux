@@ -1,6 +1,63 @@
 # Automation L1
 
 ## Start the Sparta app with a script (no database)
+
+### Sparta App front page
+1) update - gets the information about the latest veriosn of packages available for the system (doesn't download or install anything).
+   ```bash
+   sudo apt update -y
+   ```
+2) upgrade - download and install the latest version of the packages for the system.
+   ```bash
+   sudo apt upgrade -y
+   ```
+3) install nginx - web server (after it installed, it starts autometically)
+   ```bash
+   sudo apt install nginx -y
+   ```
+4) restart nginx
+   ```bash
+   sudo systemctl restart nginx
+   ```
+5) enable nginx
+   ```bash
+   sudo systemctl enable nginx
+   ```
+6) (optional) check the status of nginx
+   ```bash
+   sudo systemctl status nginx
+   ```
+7) download nodejs - for running web applications
+   ```bash
+   curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - 
+   ```
+8) install nodejs
+   ```bash
+   sudo apt install nodejs -y
+   ```
+9) Install node package manager pm2 to run nodejs in the background
+   ```bash
+   sudo npm install pm2 -g
+   ``` 
+10) copy the app folder into vm
+    ```bash
+    git clone https://github.com/jungjinggg/tech241_sparta_app.git app
+    ```
+11) go into the app folder
+    ```bash
+    cd ~/app/app
+    ```
+12) inside the app folder run:
+    1) install the dependencies in the local node_modules
+         ```bash
+         npm install 
+         ```
+    2) run the app
+         ```bash
+         pm2 start app.js
+         ```
+
+### Full script
 ```bash
 #!/bin/bash
 
@@ -19,10 +76,10 @@ sudo systemctl restart nginx
 # enable nginx - makes sure that when vm is restarted, ngix auto start on reboot
 sudo systemctl enable nginx
 
-# install nodejs
+# download nodejs
 curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
 
-# download nodejs
+# install nodejs
 sudo apt install nodejs -y
 
 # node package manager
@@ -32,7 +89,7 @@ sudo npm install pm2 -g
 git clone https://github.com/jungjinggg/tech241_sparta_app.git app
 
 # go into the app folder
-cd /home/adminuser/app/app
+cd ~/app/app
 
 # install npm
 npm install
@@ -48,13 +105,55 @@ pm2 start app.js
 
 3) using `pm2 start app.js`
 
-when start terminal when run command you can start 
-
-everytime you run a script u specify /bin/bash tell linux to run this script to run another bash shell
 
 # Automation L2
 
 ## Configure Mongo DB VM (including bindIp) with the script
+
+### Sparta App posts page
+1) update
+   ```bash
+   sudo apt-get update -y
+   ```
+2) upgrade
+   ```bash
+   sudo apt-get upgrade -y
+   ```
+3) download MongoDB key (make sure it's the right version: 3.2.x)
+   ```bash
+   wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
+   ```
+4) add the MongoDB source to the package manager's configuration
+   ```bash
+   echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+   ```
+5) update again
+   ```bash
+   sudo apt-get update -y
+   ```
+6) install MongoDB
+   ``` bash
+   sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
+   ```
+7) configure MongoDB to accept any connections
+   change bindIP to 0.0.0.0
+   ```bash
+   sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf
+   ```
+8) start MongoDB (it doesn't start autometically like nginx)
+   ```bash
+   sudo systemctl start mongod
+   ```
+9) check MongoDB status
+   ```bash
+   sudo systemctl status mongod
+   ``` 
+10) enable MongoDB
+    ```bash
+    sudo systemctl enable mongod
+    ```
+
+### Full Script
 ```bash
 #!/bin/bash
 
@@ -68,13 +167,13 @@ sudo apt upgrade -y
 wget -qO - https://www.mongodb.org/static/pgp/server-3.2.asc | sudo apt-key add -
 
 # source list - specify mongo db version
-echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /e$
+echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
 
 # update again
 sudo apt update -y
 
 # install mongo db
-sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20$
+sudo apt-get install -y mongodb-org=3.2.20 mongodb-org-server=3.2.20 mongodb-org-shell=3.2.20 mongodb-org-mongos=3.2.20 mongodb-org-tools=3.2.20
 
 # configure bindip to 0.0.0.0
 sudo sed -i 's/bindIp: 127.0.0.1/bindIp: 0.0.0.0/g' /etc/mongod.conf
@@ -86,13 +185,22 @@ sudo systemctl start mongod
 sudo systemctl status mongod
 
 # enable mongo db
-sudo systemclt enable mongod
+sudo systemctl enable mongod
 ```
-
-`sed` command -i is used to replace bindIP so that inbound port can be from any ports
+*`sed` command -i is used to replace bindIP so that inbound port can be from any any ip address*
 
 # Automation L3
-## Modify app VM script to use database VM 
+
+## Modify app VM script to use database VM
+At this level, we need to modify the script so that the app virtual machine can retrieve data from database virtual machine. The script stays almost the same as level 1 automation.
+
+
+**Set environment variable in the script**
+```bash
+export DB_HOST=mongodb://172.187.161.179:27017/posts
+```
+
+### Full Script
 ```bash
 #!/bin/bash
 
@@ -126,17 +234,29 @@ git clone https://github.com/jungjinggg/tech241_sparta_app.git app
 # env variable
 export DB_HOST=mongodb://172.187.161.179:27017/posts
 
-# go into the app folder
-cd /home/adminuser/app/app
+# reverse proxy
+sudo sed -i 's@try_files $uri $uri/ =404;@proxy_pass http://localhost:3000;@g' /etc/nginx/sites-available/default
 
-# install npm
+# restart nginx
+sudo systemctl restart nginx
+
+# go into the app folder
+cd ~/app/app
+
+# install npm - install the nodejs code
 npm install
 
 # run sparta node app in the background
 pm2 start app.js
 ```
-## Stop pm2
-`pm2 stop 0`
+### Stop the app from running
+```bash
+pm2 stop 0
+```
 
 ### Note
 *To get the app working, the database vm needs to be run first to pull data from MongoDB. Then run the app vm so that it can create a post page with the data from database vm.*
+
+*npm = node package manager*
+
+*pm2 = advanced node process manager*
