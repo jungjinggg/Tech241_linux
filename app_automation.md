@@ -15,39 +15,35 @@
    ```bash
    sudo apt install nginx -y
    ```
-4) restart nginx
-   ```bash
-   sudo systemctl restart nginx
-   ```
-5) enable nginx
+4) enable nginx
    ```bash
    sudo systemctl enable nginx
    ```
-6) (optional) check the status of nginx
+5) (optional) check the status of nginx
    ```bash
    sudo systemctl status nginx
    ```
-7) download nodejs - for running web applications
+6) download nodejs - for running web applications
    ```bash
    curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash - 
    ```
-8) install nodejs
+7) install nodejs
    ```bash
    sudo apt install nodejs -y
    ```
-9) Install node package manager pm2 to run nodejs in the background
+8) Install node package manager pm2 to run nodejs in the background
    ```bash
    sudo npm install pm2 -g
    ``` 
-10) copy the app folder into vm
+9)  copy the app folder into vm
     ```bash
     git clone https://github.com/jungjinggg/tech241_sparta_app.git app
     ```
-11) go into the app folder
+10) go into the app folder
     ```bash
     cd ~/app/app
     ```
-12) inside the app folder run:
+11) inside the app folder run:
     1) install the dependencies in the local node_modules
          ```bash
          npm install 
@@ -213,9 +209,6 @@ sudo apt upgrade -y
 # install nginx - when installed it starts autometically
 apt install nginx -y
 
-# restart nginx
-sudo systemctl restart nginx
-
 # enable nginx - makes sure that when vm is restarted, ngix auto start on reboot
 sudo systemctl enable nginx
 
@@ -229,10 +222,13 @@ sudo apt install nodejs -y
 sudo npm install pm2 -g
 
 # copy app folder to VM
-git clone https://github.com/jungjinggg/tech241_sparta_app.git app
+git clone https://github.com/jungjinggg/tech241_sparta_app.git repo
 
 # env variable
-export DB_HOST=mongodb://172.187.161.179:27017/posts
+export DB_HOST=mongodb://172.31.34.136:27017/posts
+
+# make sure sed is installed
+sudo apt install sed -y
 
 # reverse proxy
 sudo sed -i 's@try_files $uri $uri/ =404;@proxy_pass http://localhost:3000;@g' /etc/nginx/sites-available/default
@@ -241,10 +237,18 @@ sudo sed -i 's@try_files $uri $uri/ =404;@proxy_pass http://localhost:3000;@g' /
 sudo systemctl restart nginx
 
 # go into the app folder
-cd ~/app/app
+cd repo/app
 
-# install npm - install the nodejs code
+# install npm - install the nodejs code/ downloads required dependencies for nodejs, also check for DB_HOST, if it exists itll try to connect, it non exists, it wont set up posts page  
 npm install
+
+# seed batabase
+echo "Clearing and seeding database.."
+node seeds/seed.js
+echo " --> Done!"
+
+# kill previous app background process
+pm2 kills
 
 # run sparta node app in the background
 pm2 start app.js
@@ -260,3 +264,26 @@ pm2 stop 0
 *npm = node package manager*
 
 *pm2 = advanced node process manager*
+
+
+### App script without installing nginx (only run the app)
+```bash
+#!/bin/bash
+
+# env variable
+export DB_HOST=mongodb://172.31.34.136:27017/posts
+
+# go into the app folder
+cd repo/app
+
+# install npm - install the nodejs code/ downloads required dependencies for nodejs, also check for DB_HOST, if it exists itll try to connect, it non exists, it wont set up posts page  
+npm install
+
+# seed batabase
+echo "Clearing and seeding database.."
+node seeds/seed.js
+echo " --> Done!"
+
+# run sparta node app in the background
+pm2 start app.js
+```
